@@ -542,9 +542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ValueMax: 100
-  RandomValueRange: {x: 1, y: 20}
+  RandomValueRange: {x: 5, y: 20}
   Bar: {fileID: 1773178614}
-  Value: 0
 --- !u!4 &1273327567
 Transform:
   m_ObjectHideFlags: 0
@@ -882,11 +881,6 @@ MonoBehaviour:
   BackFadeOutDuration: 0.5
   FrontFillImage: {fileID: 1650034339}
   BackFillImage: {fileID: 2103735355}
-  Percent: 0
-  LastPercent: 0
-  FrontLerpStep: 0
-  SinceLastSetPercent: 0
-  BackFadeOutStep: 0
 --- !u!1 &1944564593
 GameObject:
   m_ObjectHideFlags: 0
