@@ -8,7 +8,6 @@ namespace Timespawn.Core.UI
     public class ProgressBar : MonoBehaviour
     {
         [Header("Parameters")]
-        [SerializeField] private bool EnableBackFillImage = true;
         [SerializeField] private float FrontLerpDuration = 0.2f;
         [SerializeField] private float BackDelayDuration = 1.5f;
         [SerializeField] private float BackFadeOutDuration = 0.5f;
@@ -24,35 +23,33 @@ namespace Timespawn.Core.UI
         private float FrontLerpStep;
 
         // Back
+        private bool EnableBackFillImage;
         private float SinceLastSetPercent;
         private float BackFadeOutStep;
 
         private void Awake()
         {
-            Debug.Assert(FrontLerpDuration > 0, "Duration should not be <= 0.");
             Debug.Assert(FrontFillImage, "Front image is null.");
 
+            EnableBackFillImage = BackDelayDuration > 0;
             if (EnableBackFillImage)
             {
-                Debug.Assert(BackDelayDuration > 0, "Duration should not be <= 0.");
-                Debug.Assert(BackFadeOutDuration > 0, "Duration should not be <= 0.");
-                Debug.Assert(BackFillImage, "Back image is null.");
+                Debug.Assert(BackFillImage, "Back delay duration is > 0, but back image is null.");
             }
-
-            if (!EnableBackFillImage)
+            else
             {
-                SetBackFillImageAlpha(0.0f);
+                // Hide back image if it exists
+                if (BackFillImage)
+                {
+                    SetBackFillImageAlpha(0.0f);
+                }
             }
         }
         
         private void Update()
         {
             UpdateFrontLerp();
-
-            if (EnableBackFillImage)
-            {
-                UpdateBackFadeOut();
-            }
+            UpdateBackFadeOut();
         }
 
         public float GetPercent()
@@ -89,19 +86,42 @@ namespace Timespawn.Core.UI
                 return;
             }
 
-            FrontLerpStep += Time.deltaTime / FrontLerpDuration;
+            if (FrontLerpDuration > 0)
+            {
+                FrontLerpStep += Time.deltaTime / FrontLerpDuration;
+            }
+            else // FrontLerpDuration <= 0
+            {
+                // Instant
+                FrontLerpStep = 1.0f;
+            }
+
             FrontFillImage.fillAmount = Mathf.Lerp(LastPercent, Percent, FrontLerpStep);
         }
 
         private void UpdateBackFadeOut()
         {
+            if (!EnableBackFillImage)
+            {
+                return;
+            }
+
             if (SinceLastSetPercent < BackDelayDuration)
             {
                 SinceLastSetPercent += Time.deltaTime;
                 return;
             }
 
-            BackFadeOutStep += Time.deltaTime / BackFadeOutDuration;
+            if (BackFadeOutDuration > 0)
+            {
+                BackFadeOutStep += Time.deltaTime / BackFadeOutDuration;
+            }
+            else // BackFadeOutDuration <= 0
+            {
+                // Instant
+                BackFadeOutStep = 1.0f;
+            }
+
             float alpha = Mathf.Lerp(1.0f, 0.0f, BackFadeOutStep);
             SetBackFillImageAlpha(alpha);
         }

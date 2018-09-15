@@ -875,7 +875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec31fca610d0b544096ea7b3c4026926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableBackFillImage: 1
   FrontLerpDuration: 0.2
   BackDelayDuration: 1
   BackFadeOutDuration: 0.5
