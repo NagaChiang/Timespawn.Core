@@ -7,8 +7,10 @@ namespace Timespawn.Core.UI
 {
     public class ProgressBar : MonoBehaviour
     {
-        [Header("Parameters")]
+        [Header("Front Image")]
         [SerializeField] private float FrontLerpDuration = 0.2f;
+
+        [Header("Back Image")]
         [SerializeField] private float BackDelayDuration = 1.5f;
         [SerializeField] private float BackFadeOutDuration = 0.5f;
 
