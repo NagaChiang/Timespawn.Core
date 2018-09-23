@@ -98,7 +98,7 @@ namespace Timespawn.Core.UI
                 FrontLerpStep = 1.0f;
             }
 
-            FrontFillImage.fillAmount = Mathf.Lerp(LastPercent, Percent, FrontLerpStep);
+            FrontFillImage.fillAmount = Mathf.SmoothStep(LastPercent, Percent, FrontLerpStep);
         }
 
         private void UpdateBackFadeOut()
@@ -124,7 +124,7 @@ namespace Timespawn.Core.UI
                 BackFadeOutStep = 1.0f;
             }
 
-            float alpha = Mathf.Lerp(1.0f, 0.0f, BackFadeOutStep);
+            float alpha = Mathf.SmoothStep(1.0f, 0.0f, BackFadeOutStep);
             SetBackFillImageAlpha(alpha);
         }
 

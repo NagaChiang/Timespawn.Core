@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Timespawn.Core.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Timespawn.Core.Demo
 {
     public class ProgressBarDemo : MonoBehaviour
     {
         [Header("Parameters")]
-        [SerializeField] private float ValueMax = 100.0f;
-        [SerializeField] private Vector2 RandomValueRange = new Vector2(10.0f, 80.0f);
+        [SerializeField] private int ValueMax = 100;
+        [SerializeField] private Vector2Int RandomValueRange = new Vector2Int(5, 30);
 
         [Header("UI")]
         [SerializeField] private ProgressBar Bar;
+        [SerializeField] private Text ProgressText;
 
-        private float Value = 0.0f;
+        private int Value;
 
         private void Awake()
         {
@@ -24,21 +26,29 @@ namespace Timespawn.Core.Demo
 
         private void Start()
         {
-            Bar.SetPercent(Value / ValueMax);
+            Bar.SetPercent((float)Value / ValueMax);
+            SetProgressText(Value, ValueMax);
         }
 
         public void IncreaseProgressButton_OnClick()
         {
-            float valueChange = UnityEngine.Random.Range(RandomValueRange.x, RandomValueRange.y);
-            Value = Mathf.Clamp(Value + valueChange, 0.0f, ValueMax);
-            Bar.SetPercent(Value / ValueMax);
+            int valueChange = UnityEngine.Random.Range(RandomValueRange.x, RandomValueRange.y);
+            Value = Mathf.FloorToInt(Mathf.Clamp(Value + valueChange, 0.0f, ValueMax));
+            Bar.SetPercent((float)Value / ValueMax);
+            SetProgressText(Value, ValueMax);
         }
 
         public void DecreaseProgressButton_OnClick()
         {
             float valueChange = UnityEngine.Random.Range(RandomValueRange.x, RandomValueRange.y);
-            Value = Mathf.Clamp(Value - valueChange, 0.0f, ValueMax);
-            Bar.SetPercent(Value / ValueMax);
+            Value = Mathf.FloorToInt(Mathf.Clamp(Value - valueChange, 0.0f, ValueMax));
+            Bar.SetPercent((float)Value / ValueMax);
+            SetProgressText(Value, ValueMax);
+        }
+
+        private void SetProgressText(int value, int valueMax)
+        {
+            ProgressText.text = value.ToString() + " / " + valueMax.ToString();
         }
     }
 }

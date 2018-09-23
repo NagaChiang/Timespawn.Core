@@ -11,26 +11,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7438cacb2e910c468a87db41bf7dfa3, type: 3}
   m_Name: ShakeParams_small
   m_EditorClassIdentifier: 
-  Duration: 1
+  Duration: 0.5
   EaseInDuration: 0.2
   EaseOutDuration: 0.2
   PositionShakeParams:
     x:
-      Amplitude: 0.2
+      Amplitude: 0.1
       Frequency: 20
     y:
-      Amplitude: 0.2
+      Amplitude: 0.1
       Frequency: 20
     z:
-      Amplitude: 0.2
+      Amplitude: 0.1
       Frequency: 20
   RotationShakeParams:
     x:
-      Amplitude: 5
+      Amplitude: 2
       Frequency: 20
     y:
-      Amplitude: 5
+      Amplitude: 2
       Frequency: 20
     z:
-      Amplitude: 5
+      Amplitude: 2
       Frequency: 20
