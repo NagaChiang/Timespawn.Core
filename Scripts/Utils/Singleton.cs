@@ -19,5 +19,19 @@ namespace Timespawn.Core.Utils
 
             return ProtectedInstance;
         }
+
+        protected virtual void Awake()
+        {
+            if (ProtectedInstance)
+            {
+                Debug.LogAssertionFormat("Singleton instance of {0} already exists. Destroy self.", GetType().Name);
+
+                Destroy(this);
+            }
+            else
+            {
+                ProtectedInstance = this as T;
+            }
+        }
     }
 }
