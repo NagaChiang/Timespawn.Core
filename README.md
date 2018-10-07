@@ -21,7 +21,6 @@ Timespawn's Unity common toolkits, including scripts, shaders and UI, etc.
 ### Extensions
 
 - Array
-
   - bool IsValidIndex(int index)
 
 ### Utils

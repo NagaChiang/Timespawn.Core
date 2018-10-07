@@ -21,24 +21,34 @@ namespace Timespawn.Core.FX
         private void Awake()
         {
             MainCamera = Camera.main;
+            
+            Debug.Assert(MainCamera, "Failed to find the main camera.");
         }
 
         private void Update()
         {
-            if (ElapsedDuration < CurrentCameraShakeParams.Duration)
+            if (CurrentCameraShakeParams && (ElapsedDuration < CurrentCameraShakeParams.Duration))
             {
                 ElapsedDuration += Time.deltaTime;
 
                 UpdateEaseInOut();
                 UpdateTransform();
+
+                // End
+                if (ElapsedDuration >= CurrentCameraShakeParams.Duration)
+                {
+                    StopShake();
+                }
             }
         }
 
         public void PlayShake(CameraShakeParams shakeParams)
         {
+            Debug.Assert(shakeParams, "CameraShakeParams is null.");
+
             CurrentCameraShakeParams = shakeParams;
             ElapsedDuration = 0.0f;
-            EaseScale = 0.0f;
+            EaseScale = CurrentCameraShakeParams.EaseInDuration > 0 ? 0.0f : 1.0f;
 
             // Perlin noise seeds (x-axis)
             PositionSeeds.x = Random.Range(0.0f, SEED_MAX);
@@ -51,36 +61,23 @@ namespace Timespawn.Core.FX
 
         public void StopShake()
         {
-            ElapsedDuration = CurrentCameraShakeParams.Duration;
+            CurrentCameraShakeParams = null;
+            ResetLocalTransform();
         }
 
         private void UpdateEaseInOut()
         {
             float easeInDuration = CurrentCameraShakeParams.EaseInDuration;
             float easeOutDuration = CurrentCameraShakeParams.EaseOutDuration;
-            if (ElapsedDuration < easeInDuration)
+            if ((easeInDuration > 0) && (ElapsedDuration < easeInDuration))
             {
                 // Ease in
-                if (easeInDuration > 0)
-                {
-                    EaseScale += Time.deltaTime / easeInDuration;
-                }
-                else
-                {
-                    EaseScale = 1.0f;
-                }
+                EaseScale += Time.deltaTime / easeInDuration;
             }
-            else if ((CurrentCameraShakeParams.Duration - ElapsedDuration) < easeOutDuration)
+            else if ((easeOutDuration > 0) && ((CurrentCameraShakeParams.Duration - ElapsedDuration) < easeOutDuration))
             {
                 // Ease out
-                if (easeOutDuration > 0)
-                {
-                    EaseScale -= Time.deltaTime / easeOutDuration;
-                }
-                else
-                {
-                    EaseScale = 0.0f;
-                }
+                EaseScale -= Time.deltaTime / easeOutDuration;
             }
 
             EaseScale = Mathf.Clamp01(EaseScale);
@@ -107,6 +104,12 @@ namespace Timespawn.Core.FX
         private float CalculateOffset(float amplitude, float frequency, float seed)
         {
             return amplitude * EaseScale * (Mathf.PerlinNoise(seed, ElapsedDuration * frequency) - 0.5f);
+        }
+
+        private void ResetLocalTransform()
+        {
+            MainCamera.transform.localPosition = Vector3.zero;
+            MainCamera.transform.localRotation = Quaternion.identity;
         }
     }
 }
