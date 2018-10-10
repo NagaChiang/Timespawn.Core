@@ -7,8 +7,10 @@ Timespawn's Unity common toolkits, including scripts, shaders and UI, etc.
 ### FX
 
 - [Camera Shaker](http://nagachiang.github.io/Timespawn.Core/CameraShaker/)
-  - 3D positional and rotational shake
+  - 3D positional and rotational shake with ease in/out
   - Perlin noise
+- [Time Scaler](http://nagachiang.github.io/Timespawn.Core/TimeScaler/)
+  - Alter `Time.timeScale` with duration and ease in/out
 
 ### UI
 

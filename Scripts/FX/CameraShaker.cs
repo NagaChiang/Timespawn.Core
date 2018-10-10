@@ -27,17 +27,22 @@ namespace Timespawn.Core.FX
 
         private void Update()
         {
-            if (CurrentCameraShakeParams && (ElapsedDuration < CurrentCameraShakeParams.Duration))
+            if (CurrentCameraShakeParams)
             {
-                ElapsedDuration += Time.deltaTime;
-
-                UpdateEaseInOut();
-                UpdateTransform();
-
-                // End
-                if (ElapsedDuration >= CurrentCameraShakeParams.Duration)
+                float duration = CurrentCameraShakeParams.Duration;
+                bool isInfinite = duration < 0;
+                if ((ElapsedDuration < duration) || isInfinite)
                 {
-                    StopShake();
+                    UpdateEaseInOut();
+                    UpdateTransform();
+
+                    ElapsedDuration += Time.deltaTime;
+
+                    // End
+                    if (ElapsedDuration >= duration)
+                    {
+                        StopShake();
+                    }
                 }
             }
         }
