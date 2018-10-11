@@ -11,6 +11,7 @@ namespace Timespawn.Core.FX
 
         private float ElapsedDuration;
         private float EaseStep;
+        private float StartTimeScale = 1.0f;
 
         private void Update()
         {
@@ -34,7 +35,7 @@ namespace Timespawn.Core.FX
             }
         }
 
-        public void StartScale(TimeScaleParams scaleParams)
+        public void StartScaleTime(TimeScaleParams scaleParams)
         {
             Debug.Assert(scaleParams, "TimeScaleParams is null.");
             Debug.Assert(scaleParams.TimeScale >= 0, "TimeScale should be >= 0.");
@@ -43,10 +44,10 @@ namespace Timespawn.Core.FX
             ElapsedDuration = 0.0f;
             EaseStep = CurrentTimeScaleParams.EaseInDuration > 0 ? 0.0f : 1.0f;
 
-            Time.timeScale = 1.0f;
+            StartTimeScale = Time.timeScale;
         }
 
-        public void StartScale(float timeScale, float duration = -1.0f, float easeInDuration = 0.0f, float easeOutDuration = 0.0f)
+        public void StartScaleTime(float timeScale, float duration = -1.0f, float easeInDuration = 0.0f, float easeOutDuration = 0.0f)
         {
             TimeScaleParams scaleParams = new TimeScaleParams();
             scaleParams.TimeScale = timeScale;
@@ -54,7 +55,7 @@ namespace Timespawn.Core.FX
             scaleParams.EaseInDuration = easeInDuration;
             scaleParams.EaseOutDuration = easeOutDuration;
 
-            StartScale(scaleParams);
+            StartScaleTime(scaleParams);
         }
 
         private void UpdateEaseInOut()
@@ -72,12 +73,18 @@ namespace Timespawn.Core.FX
                 EaseStep -= Time.unscaledDeltaTime / easeOutDuration;
             }
 
+            // Reset StartTimeScale after fully eased in
+            if (EaseStep >= 1.0f)
+            {
+                StartTimeScale = 1.0f;
+            }
+
             EaseStep = Mathf.Clamp01(EaseStep);
         }
 
         private void UpdateTimeScale()
         {
-            Time.timeScale = Mathf.Lerp(1.0f, CurrentTimeScaleParams.TimeScale, EaseStep);
+            Time.timeScale = Mathf.Lerp(StartTimeScale, CurrentTimeScaleParams.TimeScale, EaseStep);
         }
     }
 }

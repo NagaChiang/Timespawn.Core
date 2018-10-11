@@ -10,11 +10,11 @@ public class TimeScalerDemo : MonoBehaviour
 
     public void SlowMotion()
     {
-        TimeScaler.Instance().StartScale(SlowMotionParams);
+        TimeScaler.Instance().StartScaleTime(SlowMotionParams);
     }
 
     public void Freeze()
     {
-        TimeScaler.Instance().StartScale(FreezeParams);
+        TimeScaler.Instance().StartScaleTime(FreezeParams);
     }
 }
