@@ -49,7 +49,7 @@ namespace Timespawn.Core.FX
 
         public void StartScaleTime(float timeScale, float duration = -1.0f, float easeInDuration = 0.0f, float easeOutDuration = 0.0f)
         {
-            TimeScaleParams scaleParams = new TimeScaleParams();
+            TimeScaleParams scaleParams = ScriptableObject.CreateInstance<TimeScaleParams>();
             scaleParams.TimeScale = timeScale;
             scaleParams.Duration = duration;
             scaleParams.EaseInDuration = easeInDuration;
