@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047e66b1022769a47832c8d3d537dbb0, type: 3}
+  m_Name: TimeScaleParams_Freeze
+  m_EditorClassIdentifier: 
+  TimeScale: 0
+  Duration: 5
+  EaseInDuration: 1
+  EaseOutDuration: 1
