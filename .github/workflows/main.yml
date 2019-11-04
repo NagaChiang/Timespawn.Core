@@ -1,0 +1,12 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Subtree Sync
+        uses: xedi/action-subtree-sync@1.0.0
+
+
