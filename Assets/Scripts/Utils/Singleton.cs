@@ -11,7 +11,7 @@ namespace Timespawn.Core.Utils
 
         public static T Instance()
         {
-            if (ProtectedInstance == null)
+            if (!ProtectedInstance)
             {
                 GameObject obj = new GameObject(typeof(T).Name);
                 ProtectedInstance = obj.AddComponent<T>();
@@ -25,7 +25,6 @@ namespace Timespawn.Core.Utils
             if (ProtectedInstance)
             {
                 Debug.LogAssertionFormat("Singleton instance of {0} already exists. Destroy self.", GetType().Name);
-
                 Destroy(this);
             }
             else

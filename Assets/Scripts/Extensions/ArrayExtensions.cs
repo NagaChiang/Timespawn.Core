@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Timespawn.Core.Extensions
 {
-    public static class ArrayExtension
+    public static class ArrayExtensions
     {
         public static bool IsValidIndex(this Array array, int index)
         {
