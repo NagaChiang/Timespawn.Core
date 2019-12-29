@@ -2,6 +2,10 @@
     "name": "com.timespawn.core",
     "displayName": "Timespawn.Core",
     "version": "0.1.0",
+    "author": {
+        "name": "Naga Chiang",
+        "email": "nagachiangdev@gmail.com"
+    },
     "unity": "2019.2",
     "description": "Common Unity toolkit of Timespawn.",
     "keywords": ["unity", "toolkit", "scripts"],
