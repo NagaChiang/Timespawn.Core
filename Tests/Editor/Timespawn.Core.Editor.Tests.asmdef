@@ -1,3 +1,11 @@
-﻿{
-	"name": "Unity.TimespawnCore.Tests.Editor"
+{
+    "name": "Timespawn.Core.Tests.Editor",
+    "references": [
+        "Timespawn.Core",
+        "Timespawn.Core.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
 }
