@@ -1,11 +1,18 @@
 {
     "name": "Timespawn.Core.Tests.Editor",
     "references": [
-        "Timespawn.Core",
-        "Timespawn.Core.Editor"
+        "GUID:2e61e1436e5174546b7d7e5548493fcf",
+        "GUID:96ab1b37fa9faa6459a9b645a28b953c"
     ],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,3 +1,17 @@
-﻿{
-	"name": "Timespawn.Core.Editor"
+{
+    "name": "Timespawn.Core.Editor",
+    "references": [
+        "GUID:2e61e1436e5174546b7d7e5548493fcf"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,8 +1,15 @@
 {
     "name": "Timespawn.Core.Tests",
     "references": [
-        "Timespawn.Core"
+        "GUID:2e61e1436e5174546b7d7e5548493fcf"
     ],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
