@@ -1,11 +1,9 @@
-﻿using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Timespawn.Core.Utils
+namespace Timespawn.Core.System
 {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    [DisallowMultipleComponent]
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         protected static T ProtectedInstance;
 
@@ -24,7 +22,7 @@ namespace Timespawn.Core.Utils
         {
             if (ProtectedInstance)
             {
-                Debug.LogAssertionFormat("Singleton instance of {0} already exists. Destroy self.", GetType().Name);
+                Debug.LogWarningFormat("Singleton instance of {0} already exists. Destroy self.", GetType().Name);
                 Destroy(this);
             }
             else
