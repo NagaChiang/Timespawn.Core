@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Timespawn.Core.Extensions;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine.Assertions;
 
@@ -13,7 +14,7 @@ namespace Timespawn.Core.DOTS.Grids
 
         public float2 GetCellCenter(int x, int y)
         {
-            Assert.IsTrue(IsValidCoordinates(x, y));
+            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
 
             float2 center = new float2
             {
@@ -26,7 +27,7 @@ namespace Timespawn.Core.DOTS.Grids
 
         public float2 GetCellBottomLeft(int x, int y)
         {
-            Assert.IsTrue(IsValidCoordinates(x, y));
+            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
 
             float2 bottomLeft = new float2
             {
@@ -39,7 +40,7 @@ namespace Timespawn.Core.DOTS.Grids
 
         public int GetCellIndex(int x, int y)
         {
-            Assert.IsTrue(IsValidCoordinates(x, y));
+            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
 
             return y * ColumnNum + x;
         }
@@ -53,6 +54,11 @@ namespace Timespawn.Core.DOTS.Grids
             };
             
             return center;
+        }
+
+        public float3 CalculateWorldBottonLeft(float3 worldGridCenter)
+        {
+            return worldGridCenter - GetGridCenter().ToFloat3();
         }
 
         public bool IsValidCoordinates(int x, int y)

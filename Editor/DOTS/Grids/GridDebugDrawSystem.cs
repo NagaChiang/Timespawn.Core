@@ -16,7 +16,7 @@ namespace Timespawn.Core.Editor.DOTS.Grids
             Entities.ForEach((in Translation translation, in GridData gridData) =>
             {
                 float2 cellSize = gridData.CellSize;
-                Vector3 worldGridButtonLeft = translation.Value - gridData.GetGridCenter().ToFloat3();
+                Vector3 worldGridButtonLeft = gridData.CalculateWorldBottonLeft(translation.Value);
                 for (int y = 0; y < gridData.RowNum + 1; y++)
                 {
                     for (int x = 0; x < gridData.ColumnNum + 1; x++)
