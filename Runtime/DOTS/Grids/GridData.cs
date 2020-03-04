@@ -1,4 +1,4 @@
-﻿using Timespawn.Core.Extensions;
+﻿using System;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine.Assertions;
@@ -8,8 +8,8 @@ namespace Timespawn.Core.DOTS.Grids
     [GenerateAuthoringComponent]
     public struct GridData : IComponentData
     {
-        public ushort ColumnNum;
-        public ushort RowNum;
+        public UInt16 ColumnNum;
+        public UInt16 RowNum;
         public float2 CellSize;
 
         public float2 GetCellCenter(int x, int y)
@@ -38,13 +38,6 @@ namespace Timespawn.Core.DOTS.Grids
             return bottomLeft;
         }
 
-        public int GetCellIndex(int x, int y)
-        {
-            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
-
-            return y * ColumnNum + x;
-        }
-
         public float2 GetGridCenter()
         {
             float2 center = new float2
@@ -54,11 +47,6 @@ namespace Timespawn.Core.DOTS.Grids
             };
             
             return center;
-        }
-
-        public float3 CalculateWorldBottonLeft(float3 worldGridCenter)
-        {
-            return worldGridCenter - GetGridCenter().ToFloat3();
         }
 
         public bool IsValidCoordinates(int x, int y)
