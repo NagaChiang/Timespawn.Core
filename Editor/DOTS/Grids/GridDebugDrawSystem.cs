@@ -9,6 +9,7 @@ using UnityEngine;
 namespace Timespawn.Core.Editor.DOTS.Grids
 {
     [AlwaysSynchronizeSystem]
+    [UpdateInGroup(typeof(PresentationSystemGroup))]
     public class GridDebugDrawSystem : JobComponentSystem
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
