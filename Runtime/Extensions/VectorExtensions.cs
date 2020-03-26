@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Timespawn.Core.Extensions
 {
-    public static class MathExtensions
+    public static class VectorExtensions
     {
         public static Vector2 ToVector(this float2 pos)
         {
