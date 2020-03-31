@@ -1,6 +1,6 @@
-﻿using Unity.Entities;
+﻿using Timespawn.Core.Math;
+using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Timespawn.Core.DOTS.Tween
