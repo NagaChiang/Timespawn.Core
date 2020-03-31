@@ -10,11 +10,12 @@ namespace Timespawn.Core.DOTS.Grids
 {
     public static class GridUtils
     {
-        public static Entity CreateCellEntity(EntityManager entityManager, float3 gridCenter, GridData gridData, UInt16 x, UInt16 y, Entity prefab)
+        public static Entity CreateCellEntity(float3 gridCenter, GridData gridData, UInt16 x, UInt16 y, Entity prefab)
         {
             Assert.IsTrue(gridData.IsValidCoordinates(x, y), "Should be valid coordinates in the grid.");
             Assert.IsTrue(prefab != Entity.Null, "Should provide a non-null entity prefab.");
 
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             Entity entity = entityManager.Instantiate(prefab);
             entityManager.SetComponentData(entity, new Translation
             {
@@ -30,19 +31,13 @@ namespace Timespawn.Core.DOTS.Grids
             return entity;
         }
 
-        public static void MoveCellTo(EntityManager entityManager, Entity entity, float3 gridCenter, GridData gridData, int2 destCoords)
+        public static void SetCellData(Entity entity, int2 coords)
         {
-            Assert.IsTrue(gridData.IsValidCoordinates(destCoords), "Should be valid coordinates in the grid.");
-
-            entityManager.SetComponentData(entity, new Translation
-            {
-                Value = gridData.GetWorldCellCenter(gridCenter, destCoords),
-            });
-            
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             entityManager.SetComponentData(entity, new CellData
             {
-                x = (ushort) destCoords.x,
-                y = (ushort) destCoords.y,
+                x = (ushort) coords.x,
+                y = (ushort) coords.y,
             });
         }
 

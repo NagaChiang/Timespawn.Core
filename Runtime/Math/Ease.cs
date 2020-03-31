@@ -35,7 +35,7 @@ namespace Timespawn.Core.Math
 
         public static float SmoothStep(float t, int exponent = 2)
         {
-            return CrossFade(dt => SmoothStart(dt, exponent), dt => SmoothStop(dt, exponent), t);
+            return CrossFade(u => SmoothStart(u, exponent), u => SmoothStop(u, exponent), t);
         }
 
         public static float CrossFade(EaseFunction easeA, EaseFunction easeB, float t)
