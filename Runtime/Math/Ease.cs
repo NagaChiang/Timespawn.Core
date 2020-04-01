@@ -1,6 +1,5 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.Assertions;
+using Unity.Mathematics;
 
 namespace Timespawn.Core.Math
 {
@@ -21,16 +20,6 @@ namespace Timespawn.Core.Math
     public static class Ease
     {
         public delegate float EaseFunction(float t);
-
-        public static float Interpolate(float start, float end, float percentage)
-        {
-            return (start * (1 - percentage)) + (end * percentage);
-        }
-
-        public static Vector3 Interpolate(Vector3 start, Vector3 end, float percentage)
-        {
-            return (start * (1 - percentage)) + (end * percentage);
-        }
 
         public static float SmoothStart(float t, int exponent = 2)
         {
@@ -56,7 +45,7 @@ namespace Timespawn.Core.Math
 
         public static float SmoothStep(float t, int exponent = 2)
         {
-            return Interpolate(SmoothStart(t, exponent), SmoothStop(t, exponent), t);
+            return math.lerp(SmoothStart(t, exponent), SmoothStop(t, exponent), t);
         }
 
         public static float CrossFade(EaseFunction easeA, EaseFunction easeB, float t)

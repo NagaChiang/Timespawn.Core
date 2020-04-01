@@ -1,6 +1,6 @@
-﻿using Timespawn.Core.Math;
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
@@ -12,7 +12,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
         {
             JobHandle jobHandle = Entities.ForEach((ref Translation translation, in TweenMovementData tween) =>
             {
-                translation.Value = Ease.Interpolate(tween.Start, tween.End, tween.State.Percentage);
+                translation.Value = math.lerp(tween.Start, tween.End, tween.State.Percentage);
             }).Schedule(inputDeps);
             
             return jobHandle;
