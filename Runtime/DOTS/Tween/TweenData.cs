@@ -11,14 +11,16 @@ namespace Timespawn.Core.DOTS.Tween
         public float ElapsedTime;
         public float NormalizedTime;
         public float Percentage;
+        public bool IsPingPong;
 
-        public TweenState(EaseType type, float duration)
+        public TweenState(EaseType type, float duration, bool isPingPong)
         {
             Type = type;
             Duration = duration;
             ElapsedTime = 0.0f;
             NormalizedTime = 0.0f;
             Percentage = 0.0f;
+            IsPingPong = isPingPong;
         }
     }
 

@@ -8,64 +8,96 @@ namespace Timespawn.Core.DOTS.Tween
 {
     public static class TweenUtils
     {
-        public static void MoveEntity(Entity entity, float duration, float3 start, float3 end, EaseType type = EaseType.Linear)
+        public static void MoveEntity(
+            Entity entity,
+            float duration,
+            float3 start,
+            float3 end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             entityManager.AddComponentData(entity, new TweenMovementData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
         }
 
-        public static void MoveEntity(EntityCommandBuffer commandBuffer, Entity entity, float duration, float3 start, float3 end, EaseType type = EaseType.Linear)
+        public static void MoveEntity(
+            EntityCommandBuffer commandBuffer,
+            Entity entity,
+            float duration,
+            float3 start,
+            float3 end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
             
             commandBuffer.AddComponent(entity, new TweenMovementData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
         }
 
-        public static void RotateEntity(Entity entity, float duration, quaternion start, quaternion end, EaseType type = EaseType.Linear)
+        public static void RotateEntity(
+            Entity entity,
+            float duration,
+            quaternion start,
+            quaternion end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
             
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             entityManager.AddComponentData(entity, new TweenRotationData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
         }
 
-        public static void RotateEntity(EntityCommandBuffer commandBuffer, Entity entity, float duration, quaternion start, quaternion end, EaseType type = EaseType.Linear)
+        public static void RotateEntity(
+            EntityCommandBuffer commandBuffer,
+            Entity entity,
+            float duration,
+            quaternion start,
+            quaternion end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
             
             commandBuffer.AddComponent(entity, new TweenRotationData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
         }
 
-        public static void ScaleEntity(Entity entity, float duration, float3 start, float3 end, EaseType type = EaseType.Linear)
+        public static void ScaleEntity(
+            Entity entity,
+            float duration,
+            float3 start,
+            float3 end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             entityManager.AddComponentData(entity, new TweenScaleData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
@@ -79,14 +111,21 @@ namespace Timespawn.Core.DOTS.Tween
             }
         }
 
-        public static void ScaleEntity(EntityCommandBuffer commandBuffer, Entity entity, float duration, float3 start, float3 end, EaseType type = EaseType.Linear)
+        public static void ScaleEntity(
+            EntityCommandBuffer commandBuffer,
+            Entity entity,
+            float duration,
+            float3 start,
+            float3 end,
+            EaseType type = EaseType.Linear,
+            bool isPingPong = false)
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             commandBuffer.AddComponent(entity, new TweenScaleData
             {
-                State = new TweenState(type, duration),
+                State = new TweenState(type, duration, isPingPong),
                 Start = start,
                 End = end,
             });
