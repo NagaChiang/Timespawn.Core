@@ -4,12 +4,12 @@ using Unity.Jobs;
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
     [UpdateInGroup(typeof(TweenEaseSystemGroups))]
-    public class TweenMovementEaseSystem : JobComponentSystem
+    public class TweenScaleEaseSystem : JobComponentSystem
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
             float deltaTime = Time.DeltaTime;
-            JobHandle jobHandle = Entities.ForEach((ref TweenMovementData tween) =>
+            JobHandle jobHandle = Entities.ForEach((ref TweenScaleData tween) =>
             {
                 TweenSystemUtils.UpdateTweenState(ref tween.State, deltaTime);
             }).Schedule(inputDeps);
