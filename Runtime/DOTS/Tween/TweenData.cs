@@ -12,9 +12,10 @@ namespace Timespawn.Core.DOTS.Tween
         public float NormalizedTime;
         public float Percentage;
         public bool IsPingPong;
+        public short LoopNum;
         public bool IsReverting;
 
-        public TweenState(EaseType type, float duration, bool isPingPong)
+        public TweenState(EaseType type, float duration, bool isPingPong, short loopNum)
         {
             Type = type;
             Duration = isPingPong ? duration / 2.0f : duration;
@@ -22,6 +23,7 @@ namespace Timespawn.Core.DOTS.Tween
             NormalizedTime = 0.0f;
             Percentage = 0.0f;
             IsPingPong = isPingPong;
+            LoopNum = loopNum;
             IsReverting = false;
         }
     }

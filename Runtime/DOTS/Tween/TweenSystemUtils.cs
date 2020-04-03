@@ -22,18 +22,40 @@ namespace Timespawn.Core.DOTS.Tween
             {
                 if (state.IsPingPong)
                 {
-                    state.IsPingPong = false;
                     state.IsReverting = true;
                 }
                 else
                 {
-                    isPendingDestroy = true;
+                    if (state.LoopNum > 0)
+                    {
+                        state.LoopNum -= 1;
+                    }
+
+                    if (state.LoopNum == 0)
+                    {
+                        isPendingDestroy = true;
+                    }
+                    else
+                    {
+                        state.ElapsedTime = 0.0f;
+                    }
                 }
             }
             else if (state.IsReverting && state.NormalizedTime <= 0.0f)
             {
-                state.IsReverting = false;
-                isPendingDestroy = true;
+                if (state.LoopNum > 0)
+                {
+                    state.LoopNum -= 1;
+                }
+
+                if (state.LoopNum == 0)
+                {
+                    isPendingDestroy = true;
+                }
+                else
+                {
+                    state.IsReverting = false;
+                }
             }
 
             return isPendingDestroy;

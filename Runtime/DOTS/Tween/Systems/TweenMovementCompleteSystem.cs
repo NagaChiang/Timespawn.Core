@@ -20,7 +20,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
-                   commandBuffer.RemoveComponent<TweenMovementData>(entityInQueryIndex, entity);
+                    commandBuffer.RemoveComponent<TweenMovementData>(entityInQueryIndex, entity);
                 }
             }).Schedule(inputDeps);
 
