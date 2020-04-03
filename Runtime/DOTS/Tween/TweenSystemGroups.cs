@@ -3,20 +3,27 @@
 namespace Timespawn.Core.DOTS.Tween
 {
     [UpdateInGroup(typeof(SimulationSystemGroup))]
-    public class TweenSystemGroups : ComponentSystemGroup
+    public class TweenSystemGroup : ComponentSystemGroup
     {
 
     }
 
-    [UpdateInGroup(typeof(TweenSystemGroups))]
-    public class TweenEaseSystemGroups : ComponentSystemGroup
+    [UpdateInGroup(typeof(TweenSystemGroup))]
+    public class TweenEaseSystemGroup : ComponentSystemGroup
     {
 
     }
 
-    [UpdateInGroup(typeof(TweenSystemGroups))]
-    [UpdateAfter(typeof(TweenEaseSystemGroups))]
-    public class TweenUpdateSystemGroups : ComponentSystemGroup
+    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateAfter(typeof(TweenEaseSystemGroup))]
+    public class TweenUpdateSystemGroup : ComponentSystemGroup
+    {
+
+    }
+
+    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateAfter(typeof(TweenUpdateSystemGroup))]
+    public class TweenCompleteSystemGroup : ComponentSystemGroup
     {
 
     }

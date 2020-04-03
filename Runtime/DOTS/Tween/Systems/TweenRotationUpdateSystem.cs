@@ -5,7 +5,7 @@ using Unity.Transforms;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
-    [UpdateInGroup(typeof(TweenUpdateSystemGroups))]
+    [UpdateInGroup(typeof(TweenUpdateSystemGroup))]
     public class TweenRotationUpdateSystem : JobComponentSystem
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)

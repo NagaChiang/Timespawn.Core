@@ -3,7 +3,7 @@ using Unity.Jobs;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
-    [UpdateInGroup(typeof(TweenEaseSystemGroups))]
+    [UpdateInGroup(typeof(TweenEaseSystemGroup))]
     public class TweenScaleEaseSystem : JobComponentSystem
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)

@@ -6,7 +6,7 @@ using Unity.Transforms;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
-    [UpdateInGroup(typeof(TweenUpdateSystemGroups))]
+    [UpdateInGroup(typeof(TweenUpdateSystemGroup))]
     public class TweenScaleUpdateSystem : JobComponentSystem
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
