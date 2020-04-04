@@ -48,4 +48,8 @@ namespace Timespawn.Core.DOTS.Tween
         public float3 Start;
         public float3 End;
     }
+
+    public struct TweenPauseTag : IComponentData
+    {
+    }
 }

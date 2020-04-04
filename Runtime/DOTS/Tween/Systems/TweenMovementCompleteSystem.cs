@@ -16,7 +16,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
             EntityCommandBuffer.Concurrent commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer().ToConcurrent();
-            JobHandle jobHandle = Entities.ForEach((Entity entity, int entityInQueryIndex, ref TweenMovementData tween) =>
+            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenMovementData tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {

@@ -26,6 +26,8 @@ namespace Timespawn.Core.DOTS.Tween
                 Start = start,
                 End = end,
             });
+
+            ResumeEntity(entity);
         }
 
         public static void MoveEntity(
@@ -46,6 +48,8 @@ namespace Timespawn.Core.DOTS.Tween
                 Start = start,
                 End = end,
             });
+
+            ResumeEntity(commandBuffer, entity);
         }
 
         public static void RotateEntity(
@@ -66,6 +70,8 @@ namespace Timespawn.Core.DOTS.Tween
                 Start = start,
                 End = end,
             });
+
+            ResumeEntity(entity);
         }
 
         public static void RotateEntity(
@@ -86,6 +92,8 @@ namespace Timespawn.Core.DOTS.Tween
                 Start = start,
                 End = end,
             });
+
+            ResumeEntity(commandBuffer, entity);
         }
 
         public static void ScaleEntity(
@@ -114,6 +122,8 @@ namespace Timespawn.Core.DOTS.Tween
                     Value = new float3(1.0f),
                 });
             }
+
+            ResumeEntity(entity);
         }
 
         public static void ScaleEntity(
@@ -143,6 +153,39 @@ namespace Timespawn.Core.DOTS.Tween
                     Value = new float3(1.0f),
                 });
             }
+
+            ResumeEntity(commandBuffer, entity);
+        }
+
+        public static void PauseEntity(Entity entity)
+        {
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            entityManager.AddComponentData(entity, new TweenPauseTag());
+        }
+
+        public static void PauseEntity(EntityCommandBuffer commandBuffer, Entity entity)
+        {
+            commandBuffer.AddComponent(entity, new TweenPauseTag());
+        }
+
+        public static void ResumeEntity(Entity entity)
+        {
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            entityManager.RemoveComponent<TweenPauseTag>(entity);
+        }
+
+        public static void ResumeEntity(EntityCommandBuffer commandBuffer, Entity entity)
+        {
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            commandBuffer.RemoveComponent<TweenPauseTag>(entity);
+        }
+
+        public static void StopEntity(Entity entity)
+        {
+            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            entityManager.RemoveComponent<TweenMovementData>(entity);
+            entityManager.RemoveComponent<TweenRotationData>(entity);
+            entityManager.RemoveComponent<TweenScaleData>(entity);
         }
     }
 }
