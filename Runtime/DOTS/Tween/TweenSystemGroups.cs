@@ -27,4 +27,11 @@ namespace Timespawn.Core.DOTS.Tween
     {
 
     }
+
+    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateAfter(typeof(TweenCompleteSystemGroup))]
+    public class TweenPostCompleteSystemGroup : ComponentSystemGroup
+    {
+
+    }
 }

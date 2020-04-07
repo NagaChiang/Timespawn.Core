@@ -10,10 +10,12 @@ namespace Timespawn.Core.DOTS.Tween
     public static class TweenUtils
     {
         private static BeginSimulationEntityCommandBufferSystem BeginSimulationECBSystem;
+        private static EndSimulationEntityCommandBufferSystem EndSimulationECBSystem;
 
         static TweenUtils()
         {
             BeginSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+            EndSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
         }
 
         public static void MoveEntity(
@@ -99,13 +101,13 @@ namespace Timespawn.Core.DOTS.Tween
 
         public static void ResumeEntity(Entity entity)
         {
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = EndSimulationECBSystem.CreateCommandBuffer();
             commandBuffer.RemoveComponent<TweenPauseTag>(entity);
         }
 
         public static void StopEntity(Entity entity)
         {
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = EndSimulationECBSystem.CreateCommandBuffer();
             commandBuffer.RemoveComponent<TweenMovementData>(entity);
             commandBuffer.RemoveComponent<TweenRotationData>(entity);
             commandBuffer.RemoveComponent<TweenScaleData>(entity);
