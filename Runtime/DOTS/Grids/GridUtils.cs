@@ -1,5 +1,4 @@
 ﻿using System;
-using Timespawn.Core.Extensions;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -10,19 +9,26 @@ namespace Timespawn.Core.DOTS.Grids
 {
     public static class GridUtils
     {
+        private static BeginSimulationEntityCommandBufferSystem BeginSimulationECBSystem;
+
+        static GridUtils()
+        {
+            BeginSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+        }
+
         public static Entity CreateCellEntity(float3 gridCenter, GridData gridData, UInt16 x, UInt16 y, Entity prefab)
         {
             Assert.IsTrue(gridData.IsValidCoordinates(x, y), "Should be valid coordinates in the grid.");
             Assert.IsTrue(prefab != Entity.Null, "Should provide a non-null entity prefab.");
 
-            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-            Entity entity = entityManager.Instantiate(prefab);
-            entityManager.SetComponentData(entity, new Translation
+            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            Entity entity = commandBuffer.Instantiate(prefab);
+            commandBuffer.SetComponent(entity, new Translation
             {
                 Value = gridData.GetWorldCellCenter(gridCenter, x, y),
             });
             
-            entityManager.AddComponentData(entity, new CellData
+            commandBuffer.AddComponent(entity, new CellData
             {
                 x = x,
                 y = y,
@@ -33,8 +39,8 @@ namespace Timespawn.Core.DOTS.Grids
 
         public static void SetCellData(Entity entity, int2 coords)
         {
-            EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-            entityManager.SetComponentData(entity, new CellData
+            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            commandBuffer.SetComponent(entity, new CellData
             {
                 x = (ushort) coords.x,
                 y = (ushort) coords.y,
