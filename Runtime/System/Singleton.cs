@@ -30,5 +30,13 @@ namespace Timespawn.Core.System
                 ProtectedInstance = this as T;
             }
         }
+
+        protected void OnDestroy()
+        {
+            if (ProtectedInstance == this)
+            {
+                ProtectedInstance = null;
+            }
+        }
     }
 }
