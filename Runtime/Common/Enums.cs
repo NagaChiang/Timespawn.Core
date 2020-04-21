@@ -1,6 +1,6 @@
 ﻿namespace Timespawn.Core.Common
 {
-    public enum Direction
+    public enum Direction2D
     {
         Up,
         Down,
