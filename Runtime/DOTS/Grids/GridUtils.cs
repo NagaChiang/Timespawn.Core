@@ -9,19 +9,12 @@ namespace Timespawn.Core.DOTS.Grids
 {
     public static class GridUtils
     {
-        private static BeginSimulationEntityCommandBufferSystem BeginSimulationECBSystem;
-
-        static GridUtils()
-        {
-            BeginSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
-        }
-
         public static Entity CreateCellEntity(float3 gridCenter, GridData gridData, UInt16 x, UInt16 y, Entity prefab)
         {
             Assert.IsTrue(gridData.IsValidCoordinates(x, y), "Should be valid coordinates in the grid.");
             Assert.IsTrue(prefab != Entity.Null, "Should provide a non-null entity prefab.");
 
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             Entity entity = commandBuffer.Instantiate(prefab);
             commandBuffer.SetComponent(entity, new Translation
             {
@@ -39,7 +32,7 @@ namespace Timespawn.Core.DOTS.Grids
 
         public static void SetCellData(Entity entity, int2 coords)
         {
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.SetComponent(entity, new CellData
             {
                 x = (ushort) coords.x,

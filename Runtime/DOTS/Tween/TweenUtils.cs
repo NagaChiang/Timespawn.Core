@@ -9,15 +9,6 @@ namespace Timespawn.Core.DOTS.Tween
 {
     public static class TweenUtils
     {
-        private static BeginSimulationEntityCommandBufferSystem BeginSimulationECBSystem;
-        private static EndSimulationEntityCommandBufferSystem EndSimulationECBSystem;
-
-        static TweenUtils()
-        {
-            BeginSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
-            EndSimulationECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-        }
-
         public static void MoveEntity(
             Entity entity,
             float duration,
@@ -29,7 +20,7 @@ namespace Timespawn.Core.DOTS.Tween
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.AddComponent(entity, new TweenMovementData
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
@@ -51,7 +42,7 @@ namespace Timespawn.Core.DOTS.Tween
         {
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
             
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.AddComponent(entity, new TweenRotationData
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
@@ -74,7 +65,7 @@ namespace Timespawn.Core.DOTS.Tween
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.AddComponent(entity, new TweenScaleData
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
@@ -95,19 +86,19 @@ namespace Timespawn.Core.DOTS.Tween
 
         public static void PauseEntity(Entity entity)
         {
-            EntityCommandBuffer commandBuffer = BeginSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.AddComponent(entity, new TweenPauseTag());
         }
 
         public static void ResumeEntity(Entity entity)
         {
-            EntityCommandBuffer commandBuffer = EndSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.RemoveComponent<TweenPauseTag>(entity);
         }
 
         public static void StopEntity(Entity entity)
         {
-            EntityCommandBuffer commandBuffer = EndSimulationECBSystem.CreateCommandBuffer();
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.RemoveComponent<TweenMovementData>(entity);
             commandBuffer.RemoveComponent<TweenRotationData>(entity);
             commandBuffer.RemoveComponent<TweenScaleData>(entity);
