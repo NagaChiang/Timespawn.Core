@@ -9,7 +9,7 @@ namespace Timespawn.Core.DOTS.Grids
         public ushort x;
         public ushort y;
 
-        public int2 GetCoords()
+        public int2 GetCoord()
         {
             return new int2(x, y);
         }

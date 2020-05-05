@@ -18,14 +18,14 @@ namespace Timespawn.Core.DOTS.Grids
             return worldGridCenter - GetGridCenter().ToFloat3() + GetCellCenter(x, y).ToFloat3();
         }
 
-        public float3 GetWorldCellCenter(float3 worldGridCenter, int2 coords)
+        public float3 GetWorldCellCenter(float3 worldGridCenter, int2 coord)
         {
-            return GetWorldCellCenter(worldGridCenter, coords.x, coords.y);
+            return GetWorldCellCenter(worldGridCenter, coord.x, coord.y);
         }
 
         public float2 GetCellCenter(int x, int y)
         {
-            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
+            Assert.IsTrue(IsValidCoord(x, y), "Coordinates should be in range.");
 
             float2 center = new float2
             {
@@ -38,7 +38,7 @@ namespace Timespawn.Core.DOTS.Grids
 
         public float2 GetCellBottomLeft(int x, int y)
         {
-            Assert.IsTrue(IsValidCoordinates(x, y), "Coordinates should be in range.");
+            Assert.IsTrue(IsValidCoord(x, y), "Coordinates should be in range.");
 
             float2 bottomLeft = new float2
             {
@@ -60,14 +60,14 @@ namespace Timespawn.Core.DOTS.Grids
             return center;
         }
 
-        public bool IsValidCoordinates(int x, int y)
+        public bool IsValidCoord(int x, int y)
         {
             return x >= 0 && x < ColumnNum && y >= 0 && y < RowNum;
         }
 
-        public bool IsValidCoordinates(int2 coords)
+        public bool IsValidCoord(int2 coord)
         {
-            return IsValidCoordinates(coords.x, coords.y);
+            return IsValidCoord(coord.x, coord.y);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Timespawn.Core.DOTS.Grids
     {
         public static Entity CreateCellEntity(float3 gridCenter, GridData gridData, UInt16 x, UInt16 y, Entity prefab)
         {
-            Assert.IsTrue(gridData.IsValidCoordinates(x, y), "Should be valid coordinates in the grid.");
+            Assert.IsTrue(gridData.IsValidCoord(x, y), "Should be valid coordinates in the grid.");
             Assert.IsTrue(prefab != Entity.Null, "Should provide a non-null entity prefab.");
 
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
@@ -30,21 +30,21 @@ namespace Timespawn.Core.DOTS.Grids
             return entity;
         }
 
-        public static void SetCellData(Entity entity, int2 coords)
+        public static void SetCellData(Entity entity, int2 coord)
         {
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
             commandBuffer.SetComponent(entity, new CellData
             {
-                x = (ushort) coords.x,
-                y = (ushort) coords.y,
+                x = (ushort) coord.x,
+                y = (ushort) coord.y,
             });
         }
 
-        public static bool IsCellEmpty(NativeArray<CellData> cells, int2 coords)
+        public static bool IsCellEmpty(NativeArray<CellData> cells, int2 coord)
         {
             foreach (CellData cell in cells)
             {
-                if (cell.x == coords.x && cell.y == coords.y)
+                if (cell.x == coord.x && cell.y == coord.y)
                 {
                     return false;
                 }
