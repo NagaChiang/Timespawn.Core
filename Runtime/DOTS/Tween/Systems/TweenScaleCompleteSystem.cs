@@ -6,19 +6,12 @@ namespace Timespawn.Core.DOTS.Tween.Systems
     [UpdateInGroup(typeof(TweenCompleteSystemGroup))]
     public class TweenScaleCompleteSystem : JobComponentSystem
     {
-        private BeginSimulationEntityCommandBufferSystem BeginSimulationECBSystem;
-        private EndSimulationEntityCommandBufferSystem EndSimulationECSSystem;
-
-        protected override void OnCreate()
-        {
-            BeginSimulationECBSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
-            EndSimulationECSSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-        }
-
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            EntityCommandBuffer.Concurrent beginSimulationCommandBuffer = BeginSimulationECBSystem.CreateCommandBuffer().ToConcurrent();
-            EntityCommandBuffer.Concurrent endSimulationCommandBuffer = EndSimulationECSSystem.CreateCommandBuffer().ToConcurrent();
+            BeginSimulationEntityCommandBufferSystem beginSimulationECBSystem = DotsUtils.GetSystemFromDefaultWorld<BeginSimulationEntityCommandBufferSystem>();
+            EndSimulationEntityCommandBufferSystem endSimulationECSSystem = DotsUtils.GetSystemFromDefaultWorld<EndSimulationEntityCommandBufferSystem>();
+            EntityCommandBuffer.Concurrent beginSimulationCommandBuffer = beginSimulationECBSystem.CreateCommandBuffer().ToConcurrent();
+            EntityCommandBuffer.Concurrent endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().ToConcurrent();
             JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenScaleData tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
@@ -28,8 +21,8 @@ namespace Timespawn.Core.DOTS.Tween.Systems
                 }
             }).Schedule(inputDeps);
 
-            BeginSimulationECBSystem.AddJobHandleForProducer(jobHandle);
-            EndSimulationECSSystem.AddJobHandleForProducer(jobHandle);
+            beginSimulationECBSystem.AddJobHandleForProducer(jobHandle);
+            endSimulationECSSystem.AddJobHandleForProducer(jobHandle);
 
             return jobHandle;
         }
