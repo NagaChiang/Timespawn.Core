@@ -30,16 +30,6 @@ namespace Timespawn.Core.DOTS.Grids
             return entity;
         }
 
-        public static void SetCellData(Entity entity, int2 coord)
-        {
-            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
-            commandBuffer.SetComponent(entity, new CellData
-            {
-                x = (ushort) coord.x,
-                y = (ushort) coord.y,
-            });
-        }
-
         public static bool IsCellEmpty(NativeArray<CellData> cells, int2 coord)
         {
             foreach (CellData cell in cells)
