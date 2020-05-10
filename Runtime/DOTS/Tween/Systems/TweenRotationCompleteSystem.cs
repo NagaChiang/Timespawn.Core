@@ -16,8 +16,9 @@ namespace Timespawn.Core.DOTS.Tween.Systems
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
+                    endSimulationCommandBuffer.RemoveComponent<TweenMovementData>(entityInQueryIndex, entity);
                     beginSimulationCommandBuffer.AddComponent(entityInQueryIndex, entity, new TweenRotationCompleteTag());
-                    endSimulationCommandBuffer.RemoveComponent<TweenRotationData>(entityInQueryIndex, entity);
+                    endSimulationCommandBuffer.RemoveComponent<TweenRotationCompleteTag>(entityInQueryIndex, entity);
                 }
             }).Schedule(inputDeps);
 
