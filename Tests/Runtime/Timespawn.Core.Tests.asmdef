@@ -2,7 +2,9 @@
     "name": "Timespawn.Core.Tests",
     "references": [
         "GUID:2e61e1436e5174546b7d7e5548493fcf",
-        "GUID:734d92eba21c94caba915361bd5ac177"
+        "GUID:734d92eba21c94caba915361bd5ac177",
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:a5baed0c9693541a5bd947d336ec7659"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

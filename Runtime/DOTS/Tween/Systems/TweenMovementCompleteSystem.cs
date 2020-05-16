@@ -12,13 +12,12 @@ namespace Timespawn.Core.DOTS.Tween.Systems
             EndSimulationEntityCommandBufferSystem endSimulationECSSystem = DotsUtils.GetSystemFromDefaultWorld<EndSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer.Concurrent beginSimulationCommandBuffer = beginSimulationECBSystem.CreateCommandBuffer().ToConcurrent();
             EntityCommandBuffer.Concurrent endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().ToConcurrent();
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenMovementData tween) =>
+            JobHandle jobHandle = Entities.ForEach((Entity entity, int entityInQueryIndex, ref TweenMovementData tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
                     endSimulationCommandBuffer.RemoveComponent<TweenMovementData>(entityInQueryIndex, entity);
                     beginSimulationCommandBuffer.AddComponent(entityInQueryIndex, entity, new TweenMovementCompleteTag());
-                    endSimulationCommandBuffer.RemoveComponent<TweenMovementCompleteTag>(entityInQueryIndex, entity);
                 }
             }).Schedule(inputDeps);
 
