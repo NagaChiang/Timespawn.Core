@@ -3,7 +3,7 @@
 namespace Timespawn.Core.System
 {
     [DisallowMultipleComponent]
-    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         protected static T ProtectedInstance;
 
