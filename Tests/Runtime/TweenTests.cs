@@ -5,6 +5,7 @@ using Timespawn.Core.Math;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Timespawn.Core.Tests
 {
@@ -285,6 +286,76 @@ namespace Timespawn.Core.Tests
                 bool hasCompleteTagAfter = ActiveEntityManager.HasComponent<TweenScaleCompleteTag>(entity);
                 Assert.IsFalse(hasCompleteTagAfter, "Tween complete tag should have been removed.");
             }
+        }
+
+        [Test]
+        public void TweenMovementPause()
+        {
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Translation), typeof(TweenMovementData));
+            ActiveEntityManager.SetComponentData(entity, new TweenMovementData
+            {
+                State = new TweenState(EaseType.Linear, 10.0f, false, 0),
+            });
+
+            TweenUtils.PauseEntity(entity);
+
+            ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenMovementEaseSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenMovementUpdateSystem>().Update();
+
+            TweenMovementData tweenData = ActiveEntityManager.GetComponentData<TweenMovementData>(entity);
+            Translation translation = ActiveEntityManager.GetComponentData<Translation>(entity);
+
+            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqualFloat3(float3.zero, translation.Value, "Paused entity shouldn't be updated.");
+        }
+
+        [Test]
+        public void TweenRotationPause()
+        {
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Rotation), typeof(TweenRotationData));
+            ActiveEntityManager.SetComponentData(entity, new Rotation
+            {
+                Value = quaternion.identity,
+            });
+            ActiveEntityManager.SetComponentData(entity, new TweenRotationData
+            {
+                State = new TweenState(EaseType.Linear, 10.0f, false, 0),
+            });
+
+            TweenUtils.PauseEntity(entity);
+
+            ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenRotationEaseSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenRotationUpdateSystem>().Update();
+
+            TweenRotationData tweenData = ActiveEntityManager.GetComponentData<TweenRotationData>(entity);
+            Rotation rotation = ActiveEntityManager.GetComponentData<Rotation>(entity);
+
+            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqual(quaternion.identity, rotation.Value, "Paused entity shouldn't be updated.");
+        }
+
+        [Test]
+        public void TweenScalePause()
+        {
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(NonUniformScale), typeof(TweenScaleData));
+            ActiveEntityManager.SetComponentData(entity, new TweenScaleData
+            {
+                State = new TweenState(EaseType.Linear, 10.0f, false, 0),
+            });
+
+            TweenUtils.PauseEntity(entity);
+
+            ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenScaleEaseSystem>().Update();
+            ActiveWorld.GetOrCreateSystem<TweenScaleUpdateSystem>().Update();
+
+            TweenScaleData tweenData = ActiveEntityManager.GetComponentData<TweenScaleData>(entity);
+            NonUniformScale scale = ActiveEntityManager.GetComponentData<NonUniformScale>(entity);
+
+            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqualFloat3(float3.zero, scale.Value, "Paused entity shouldn't be updated.");
         }
     }
 }
