@@ -25,7 +25,7 @@ namespace Timespawn.Core.Tests
             ActiveWorld.Dispose();
 
             ActiveWorld = null;
-            ActiveEntityManager = null;
+            ActiveEntityManager = default;
 
             World.DefaultGameObjectInjectionWorld = null;
         }
