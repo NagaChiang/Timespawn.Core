@@ -9,19 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NagaChiang/timespawn-core.git"
+    "url": "https://gitlab.com/NagaChiang/timespawn-core.git"
   },
   "unity": "2019.3",
-  "description": "Common Unity toolkit of Timespawn.",
+  "description": "Timespawn's Unity common libraries. Some of them are specific to DOTS/ECS/entities.",
   "keywords": [
-    "unity",
-    "toolkit",
-    "scripts"
+    "Unity",
+    "DOTS",
+    "ECS",
+    "Entity"
   ],
-  "category": "Toolkit",
   "dependencies": {
     "com.unity.mathematics": "1.1.0",
     "com.unity.entities": "0.11.0-preview.7"
   },
+  "bugs": {
+    "url": "https://gitlab.com/NagaChiang/timespawn-core/-/issues"
+  },
+  "homepage": "https://gitlab.com/NagaChiang/timespawn-core",
   "type": "library"
 }
