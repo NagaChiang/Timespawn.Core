@@ -12,19 +12,27 @@ namespace Timespawn.Core.DOTS.Tween.Systems
             EndSimulationEntityCommandBufferSystem endSimulationECSSystem = DotsUtils.GetSystemFromDefaultWorld<EndSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer.Concurrent beginSimulationCommandBuffer = beginSimulationECBSystem.CreateCommandBuffer().ToConcurrent();
             EntityCommandBuffer.Concurrent endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().ToConcurrent();
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenRotationData tween) =>
+
+            JobHandle removeCompleteTagJob = Entities.WithAll<TweenRotationCompleteTag>().ForEach((Entity entity, int entityInQueryIndex) =>
+            {
+                endSimulationCommandBuffer.RemoveComponent<TweenRotationCompleteTag>(entityInQueryIndex, entity);
+            }).Schedule(inputDeps);
+
+            endSimulationECSSystem.AddJobHandleForProducer(removeCompleteTagJob);
+
+            JobHandle job = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenRotationData tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
                     endSimulationCommandBuffer.RemoveComponent<TweenRotationData>(entityInQueryIndex, entity);
                     beginSimulationCommandBuffer.AddComponent(entityInQueryIndex, entity, new TweenRotationCompleteTag());
                 }
-            }).Schedule(inputDeps);
+            }).Schedule(removeCompleteTagJob);
 
-            beginSimulationECBSystem.AddJobHandleForProducer(jobHandle);
-            endSimulationECSSystem.AddJobHandleForProducer(jobHandle);
+            beginSimulationECBSystem.AddJobHandleForProducer(job);
+            endSimulationECSSystem.AddJobHandleForProducer(job);
 
-            return jobHandle;
+            return job;
         }
     }
 }
