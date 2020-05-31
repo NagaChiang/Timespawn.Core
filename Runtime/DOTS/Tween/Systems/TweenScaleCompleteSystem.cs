@@ -20,11 +20,11 @@ namespace Timespawn.Core.DOTS.Tween.Systems
 
             endSimulationECSSystem.AddJobHandleForProducer(removeCompeteTagJob);
 
-            JobHandle job = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenScaleData tween) =>
+            JobHandle job = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenScale tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
-                    endSimulationCommandBuffer.RemoveComponent<TweenScaleData>(entityInQueryIndex, entity);
+                    endSimulationCommandBuffer.RemoveComponent<TweenScale>(entityInQueryIndex, entity);
                     beginSimulationCommandBuffer.AddComponent(entityInQueryIndex, entity, new TweenScaleCompleteTag());
                 }
             }).Schedule(removeCompeteTagJob);

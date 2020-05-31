@@ -10,7 +10,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref Rotation rotation, in TweenRotationData tween) =>
+            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref Rotation rotation, in TweenRotation tween) =>
             {
                 rotation.Value = math.slerp(tween.Start, tween.End, tween.State.Percentage);
             }).Schedule(inputDeps);

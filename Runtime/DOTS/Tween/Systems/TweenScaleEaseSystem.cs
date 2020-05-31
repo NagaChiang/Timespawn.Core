@@ -9,7 +9,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
             float deltaTime = Time.DeltaTime;
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref TweenScaleData tween) =>
+            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref TweenScale tween) =>
             {
                 TweenSystemUtils.UpdateTweenState(ref tween.State, deltaTime);
             }).Schedule(inputDeps);

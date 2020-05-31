@@ -20,7 +20,7 @@ namespace Timespawn.Core.DOTS.Tween
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
 
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
-            commandBuffer.AddComponent(entity, new TweenMovementData
+            commandBuffer.AddComponent(entity, new TweenMovement
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
                 Start = start,
@@ -42,7 +42,7 @@ namespace Timespawn.Core.DOTS.Tween
             Assert.IsTrue(duration > 0, "Tween duration should be larger than 0.");
             
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
-            commandBuffer.AddComponent(entity, new TweenRotationData
+            commandBuffer.AddComponent(entity, new TweenRotation
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
                 Start = start,
@@ -65,7 +65,7 @@ namespace Timespawn.Core.DOTS.Tween
 
             EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
-            commandBuffer.AddComponent(entity, new TweenScaleData
+            commandBuffer.AddComponent(entity, new TweenScale
             {
                 State = new TweenState(type, duration, isPingPong, loopNum),
                 Start = start,
@@ -98,9 +98,9 @@ namespace Timespawn.Core.DOTS.Tween
         public static void StopEntity(Entity entity)
         {
             EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
-            commandBuffer.RemoveComponent<TweenMovementData>(entity);
-            commandBuffer.RemoveComponent<TweenRotationData>(entity);
-            commandBuffer.RemoveComponent<TweenScaleData>(entity);
+            commandBuffer.RemoveComponent<TweenMovement>(entity);
+            commandBuffer.RemoveComponent<TweenRotation>(entity);
+            commandBuffer.RemoveComponent<TweenScale>(entity);
         }
     }
 }

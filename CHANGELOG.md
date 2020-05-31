@@ -8,6 +8,12 @@
 
 - Move PostCompleteSystems jobs to CompleteSystems
 
+### Misc
+
+## Changed
+
+- Remove suffix from all ECS ComponentData class names
+
 ## 0.2.0 (2020-05-26)
 
 ### DOTS Tween

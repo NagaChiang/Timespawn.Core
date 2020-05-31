@@ -5,6 +5,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using Grid = Timespawn.Core.DOTS.Grids.Grid;
 
 namespace Timespawn.Core.Editor.DOTS.Grids
 {
@@ -14,7 +15,7 @@ namespace Timespawn.Core.Editor.DOTS.Grids
     {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
-            Entities.ForEach((in Translation translation, in GridData gridData) =>
+            Entities.ForEach((in Translation translation, in Grid gridData) =>
             {
                 float2 cellSize = gridData.CellSize;
                 Vector3 worldGridButtonLeft = translation.Value - gridData.GetGridCenter().ToFloat3();

@@ -1,10 +1,9 @@
-﻿using System;
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Mathematics;
 
 namespace Timespawn.Core.DOTS.Grids
 {
-    public struct CellData : IComponentData
+    public struct Cell : IComponentData
     {
         public ushort x;
         public ushort y;

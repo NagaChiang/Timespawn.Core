@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 namespace Timespawn.Core.DOTS.Grids
 {
     [GenerateAuthoringComponent]
-    public struct GridData : IComponentData
+    public struct Grid : IComponentData
     {
         public UInt16 ColumnNum;
         public UInt16 RowNum;

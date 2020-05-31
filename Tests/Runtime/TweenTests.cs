@@ -110,8 +110,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenMovementUpdateSystem([ValueSource(nameof(MovementAndScaleUpdateSystemTestCases))] UpdateSystemTestCase<float3> testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(Translation), typeof(TweenMovementData));
-            ActiveEntityManager.SetComponentData(entity, new TweenMovementData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Translation), typeof(TweenMovement));
+            ActiveEntityManager.SetComponentData(entity, new TweenMovement
             {
                 Start = testCase.Start,
                 End = testCase.End,
@@ -130,8 +130,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenRotationUpdateSystem([ValueSource(nameof(RotationUpdateSystemTestCases))] UpdateSystemTestCase<quaternion> testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(Rotation), typeof(TweenRotationData));
-            ActiveEntityManager.SetComponentData(entity, new TweenRotationData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Rotation), typeof(TweenRotation));
+            ActiveEntityManager.SetComponentData(entity, new TweenRotation
             {
                 Start = testCase.Start,
                 End = testCase.End,
@@ -150,8 +150,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenScaleUpdateSystem([ValueSource(nameof(MovementAndScaleUpdateSystemTestCases))] UpdateSystemTestCase<float3> testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(NonUniformScale), typeof(TweenScaleData));
-            ActiveEntityManager.SetComponentData(entity, new TweenScaleData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(NonUniformScale), typeof(TweenScale));
+            ActiveEntityManager.SetComponentData(entity, new TweenScale
             {
                 Start = testCase.Start,
                 End = testCase.End,
@@ -170,8 +170,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenMovementCompleteSystem([ValueSource(nameof(CompleteSystemTestCases))] CompleteSystemTestCase testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenMovementData));
-            ActiveEntityManager.SetComponentData(entity, new TweenMovementData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenMovement));
+            ActiveEntityManager.SetComponentData(entity, new TweenMovement
             {
                 State = new TweenState
                 {
@@ -185,7 +185,7 @@ namespace Timespawn.Core.Tests
 
             ActiveWorld.GetOrCreateSystem<TweenMovementCompleteSystem>().Update();
 
-            TweenMovementData data = ActiveEntityManager.GetComponentData<TweenMovementData>(entity);
+            TweenMovement data = ActiveEntityManager.GetComponentData<TweenMovement>(entity);
             Assert.AreEqual(testCase.ExpectedReverting, data.State.IsReverting, "Incorrect IsReverting flag.");
             Assert.AreEqual(testCase.ExpectedElapsedTime, data.State.ElapsedTime, "Incorrect ElapsedTime.");
             Assert.AreEqual(testCase.ExpectedLoopNum, data.State.LoopNum, "Incorrect LoopNum.");
@@ -193,7 +193,7 @@ namespace Timespawn.Core.Tests
             if (testCase.ExpectedDestroy)
             {
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasData = ActiveEntityManager.HasComponent<TweenMovementData>(entity);
+                bool hasData = ActiveEntityManager.HasComponent<TweenMovement>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
 
                 ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
@@ -210,8 +210,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenRotationCompleteSystem([ValueSource(nameof(CompleteSystemTestCases))] CompleteSystemTestCase testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenRotationData));
-            ActiveEntityManager.SetComponentData(entity, new TweenRotationData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenRotation));
+            ActiveEntityManager.SetComponentData(entity, new TweenRotation
             {
                 State = new TweenState
                 {
@@ -225,7 +225,7 @@ namespace Timespawn.Core.Tests
 
             ActiveWorld.GetOrCreateSystem<TweenRotationCompleteSystem>().Update();
 
-            TweenRotationData data = ActiveEntityManager.GetComponentData<TweenRotationData>(entity);
+            TweenRotation data = ActiveEntityManager.GetComponentData<TweenRotation>(entity);
             Assert.AreEqual(testCase.ExpectedReverting, data.State.IsReverting, "Incorrect IsReverting flag.");
             Assert.AreEqual(testCase.ExpectedElapsedTime, data.State.ElapsedTime, "Incorrect ElapsedTime.");
             Assert.AreEqual(testCase.ExpectedLoopNum, data.State.LoopNum, "Incorrect LoopNum.");
@@ -233,7 +233,7 @@ namespace Timespawn.Core.Tests
             if (testCase.ExpectedDestroy)
             {
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasData = ActiveEntityManager.HasComponent<TweenRotationData>(entity);
+                bool hasData = ActiveEntityManager.HasComponent<TweenRotation>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
 
                 ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
@@ -250,8 +250,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenScaleCompleteSystem([ValueSource(nameof(CompleteSystemTestCases))] CompleteSystemTestCase testCase)
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenScaleData));
-            ActiveEntityManager.SetComponentData(entity, new TweenScaleData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(TweenScale));
+            ActiveEntityManager.SetComponentData(entity, new TweenScale
             {
                 State = new TweenState
                 {
@@ -265,7 +265,7 @@ namespace Timespawn.Core.Tests
 
             ActiveWorld.GetOrCreateSystem<TweenScaleCompleteSystem>().Update();
 
-            TweenScaleData data = ActiveEntityManager.GetComponentData<TweenScaleData>(entity);
+            TweenScale data = ActiveEntityManager.GetComponentData<TweenScale>(entity);
             Assert.AreEqual(testCase.ExpectedReverting, data.State.IsReverting, "Incorrect IsReverting flag.");
             Assert.AreEqual(testCase.ExpectedElapsedTime, data.State.ElapsedTime, "Incorrect ElapsedTime.");
             Assert.AreEqual(testCase.ExpectedLoopNum, data.State.LoopNum, "Incorrect LoopNum.");
@@ -273,7 +273,7 @@ namespace Timespawn.Core.Tests
             if (testCase.ExpectedDestroy)
             {
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasData = ActiveEntityManager.HasComponent<TweenScaleData>(entity);
+                bool hasData = ActiveEntityManager.HasComponent<TweenScale>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
 
                 ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
@@ -290,8 +290,8 @@ namespace Timespawn.Core.Tests
         [Test]
         public void TweenMovementPause()
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(Translation), typeof(TweenMovementData));
-            ActiveEntityManager.SetComponentData(entity, new TweenMovementData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Translation), typeof(TweenMovement));
+            ActiveEntityManager.SetComponentData(entity, new TweenMovement
             {
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
@@ -302,22 +302,22 @@ namespace Timespawn.Core.Tests
             ActiveWorld.GetOrCreateSystem<TweenMovementEaseSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenMovementUpdateSystem>().Update();
 
-            TweenMovementData tweenData = ActiveEntityManager.GetComponentData<TweenMovementData>(entity);
+            TweenMovement tween = ActiveEntityManager.GetComponentData<TweenMovement>(entity);
             Translation translation = ActiveEntityManager.GetComponentData<Translation>(entity);
 
-            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqual(0.0f, tween.State.ElapsedTime, "Paused entity state shouldn't be updated.");
             TestUtils.AreApproximatelyEqualFloat3(float3.zero, translation.Value, "Paused entity shouldn't be updated.");
         }
 
         [Test]
         public void TweenRotationPause()
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(Rotation), typeof(TweenRotationData));
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(Rotation), typeof(TweenRotation));
             ActiveEntityManager.SetComponentData(entity, new Rotation
             {
                 Value = quaternion.identity,
             });
-            ActiveEntityManager.SetComponentData(entity, new TweenRotationData
+            ActiveEntityManager.SetComponentData(entity, new TweenRotation
             {
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
@@ -328,18 +328,18 @@ namespace Timespawn.Core.Tests
             ActiveWorld.GetOrCreateSystem<TweenRotationEaseSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenRotationUpdateSystem>().Update();
 
-            TweenRotationData tweenData = ActiveEntityManager.GetComponentData<TweenRotationData>(entity);
+            TweenRotation tween = ActiveEntityManager.GetComponentData<TweenRotation>(entity);
             Rotation rotation = ActiveEntityManager.GetComponentData<Rotation>(entity);
 
-            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqual(0.0f, tween.State.ElapsedTime, "Paused entity state shouldn't be updated.");
             TestUtils.AreApproximatelyEqual(quaternion.identity, rotation.Value, "Paused entity shouldn't be updated.");
         }
 
         [Test]
         public void TweenScalePause()
         {
-            Entity entity = ActiveEntityManager.CreateEntity(typeof(NonUniformScale), typeof(TweenScaleData));
-            ActiveEntityManager.SetComponentData(entity, new TweenScaleData
+            Entity entity = ActiveEntityManager.CreateEntity(typeof(NonUniformScale), typeof(TweenScale));
+            ActiveEntityManager.SetComponentData(entity, new TweenScale
             {
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
@@ -350,10 +350,10 @@ namespace Timespawn.Core.Tests
             ActiveWorld.GetOrCreateSystem<TweenScaleEaseSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenScaleUpdateSystem>().Update();
 
-            TweenScaleData tweenData = ActiveEntityManager.GetComponentData<TweenScaleData>(entity);
+            TweenScale tween = ActiveEntityManager.GetComponentData<TweenScale>(entity);
             NonUniformScale scale = ActiveEntityManager.GetComponentData<NonUniformScale>(entity);
 
-            TestUtils.AreApproximatelyEqual(0.0f, tweenData.State.ElapsedTime, "Paused entity state shouldn't be updated.");
+            TestUtils.AreApproximatelyEqual(0.0f, tween.State.ElapsedTime, "Paused entity state shouldn't be updated.");
             TestUtils.AreApproximatelyEqualFloat3(float3.zero, scale.Value, "Paused entity shouldn't be updated.");
         }
     }
