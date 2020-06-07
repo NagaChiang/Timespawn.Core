@@ -6,13 +6,17 @@
 
 #### Added
 
-- Add public static readonly variable `ReadOnlyTweenComponentTypes`
+- Public static readonly variable `ReadOnlyTweenComponentTypes`
 
 #### Changed
 
 - Move PostCompleteSystems jobs to CompleteSystems
 
 ### Misc
+
+#### Added
+
+- `EnumUtils.GetEnumCount()`
 
 #### Changed
 

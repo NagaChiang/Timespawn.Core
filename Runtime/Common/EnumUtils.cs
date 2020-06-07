@@ -5,6 +5,11 @@ namespace Timespawn.Core.Common
 {
     public static class EnumUtils
     {
+        public static int GetEnumCount<T>()
+        {
+            return Enum.GetNames(typeof(T)).Length;
+        }
+
         public static int2 DirectionToInt2(Direction2D direction)
         {
             switch (direction)
