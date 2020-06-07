@@ -4,13 +4,17 @@
 
 ### DOTS Tween
 
-## Changed
+#### Added
+
+- Add public static readonly variable `ReadOnlyTweenComponentTypes`
+
+#### Changed
 
 - Move PostCompleteSystems jobs to CompleteSystems
 
 ### Misc
 
-## Changed
+#### Changed
 
 - Remove suffix from all ECS ComponentData class names
 

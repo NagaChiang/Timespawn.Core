@@ -8,6 +8,13 @@ namespace Timespawn.Core.DOTS.Tween
 {
     public static class TweenUtils
     {
+        public static readonly ComponentType[] ReadOnlyTweenComponentTypes = new ComponentType[]
+        {
+            ComponentType.ReadOnly<TweenMovement>(), 
+            ComponentType.ReadOnly<TweenRotation>(), 
+            ComponentType.ReadOnly<TweenScale>(), 
+        };
+
         public static void MoveEntity(
             Entity entity,
             float duration,
