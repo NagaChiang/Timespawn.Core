@@ -11,6 +11,7 @@
 #### Changed
 
 - Move PostCompleteSystems jobs to CompleteSystems
+- All tween include EntityCommandBuffer parameter for using Burst
 
 ### Misc
 

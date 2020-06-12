@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Timespawn.Core.DOTS;
 using Timespawn.Core.DOTS.Tween;
 using Timespawn.Core.DOTS.Tween.Systems;
 using Timespawn.Core.Math;
@@ -296,7 +297,8 @@ namespace Timespawn.Core.Tests
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
 
-            TweenUtils.PauseEntity(entity);
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
+            TweenUtils.PauseEntity(entity, commandBuffer);
 
             ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenMovementEaseSystem>().Update();
@@ -322,7 +324,8 @@ namespace Timespawn.Core.Tests
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
 
-            TweenUtils.PauseEntity(entity);
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
+            TweenUtils.PauseEntity(entity, commandBuffer);
 
             ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenRotationEaseSystem>().Update();
@@ -344,7 +347,8 @@ namespace Timespawn.Core.Tests
                 State = new TweenState(EaseType.Linear, 10.0f, false, 0),
             });
 
-            TweenUtils.PauseEntity(entity);
+            EntityCommandBuffer commandBuffer = DotsUtils.CreateECBFromSystem<BeginSimulationEntityCommandBufferSystem>();
+            TweenUtils.PauseEntity(entity, commandBuffer);
 
             ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
             ActiveWorld.GetOrCreateSystem<TweenScaleEaseSystem>().Update();
