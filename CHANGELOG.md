@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [Unreleased]
 
 ### DOTS Tween
 
@@ -10,8 +10,11 @@
 
 #### Changed
 
-- Move PostCompleteSystems jobs to CompleteSystems
 - All tween include EntityCommandBuffer parameter for using Burst
+
+#### Removed
+
+- Tween complete tags
 
 ### Misc
 
@@ -23,7 +26,7 @@
 
 - Remove suffix from all ECS ComponentData class names
 
-## 0.2.0 (2020-05-26)
+## [0.2.0] - 2020-05-26
 
 ### DOTS Tween
 
@@ -86,7 +89,7 @@
   - `T GetSystemFromDefaultWorld<T>() where T : ComponentSystemBase`
   - `EntityCommandBuffer CreateECBFromSystem<T>() where T : EntityCommandBufferSystem`
 
-## 0.1.0 (2019-12-29)
+## [0.1.0] - 2019-12-29
 
 ### Collections
 

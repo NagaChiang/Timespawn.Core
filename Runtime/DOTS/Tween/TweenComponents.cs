@@ -35,11 +35,6 @@ namespace Timespawn.Core.DOTS.Tween
         public float3 End;
     }
 
-    public struct TweenMovementCompleteTag : IComponentData
-    {
-
-    }
-
     public struct TweenRotation : IComponentData
     {
         public TweenState State;
@@ -47,21 +42,11 @@ namespace Timespawn.Core.DOTS.Tween
         public quaternion End;
     }
 
-    public struct TweenRotationCompleteTag : IComponentData
-    {
-
-    }
-
     public struct TweenScale : IComponentData
     {
         public TweenState State;
         public float3 Start;
         public float3 End;
-    }
-
-    public struct TweenScaleCompleteTag : IComponentData
-    {
-
     }
 
     public struct TweenPauseTag : IComponentData

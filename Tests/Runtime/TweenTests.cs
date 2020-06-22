@@ -196,15 +196,6 @@ namespace Timespawn.Core.Tests
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
                 bool hasData = ActiveEntityManager.HasComponent<TweenMovement>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
-
-                ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTag = ActiveEntityManager.HasComponent<TweenMovementCompleteTag>(entity);
-                Assert.IsTrue(hasCompleteTag, "Tween complete tag should have been added.");
-
-                ActiveWorld.GetOrCreateSystem<TweenMovementCompleteSystem>().Update();
-                ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTagAfter = ActiveEntityManager.HasComponent<TweenMovementCompleteTag>(entity);
-                Assert.IsFalse(hasCompleteTagAfter, "Tween complete tag should have been removed.");
             }
         }
 
@@ -236,15 +227,6 @@ namespace Timespawn.Core.Tests
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
                 bool hasData = ActiveEntityManager.HasComponent<TweenRotation>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
-
-                ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTag = ActiveEntityManager.HasComponent<TweenRotationCompleteTag>(entity);
-                Assert.IsTrue(hasCompleteTag, "Tween complete tag should have been added.");
-
-                ActiveWorld.GetOrCreateSystem<TweenRotationCompleteSystem>().Update();
-                ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTagAfter = ActiveEntityManager.HasComponent<TweenRotationCompleteTag>(entity);
-                Assert.IsFalse(hasCompleteTagAfter, "Tween complete tag should have been removed.");
             }
         }
 
@@ -276,15 +258,6 @@ namespace Timespawn.Core.Tests
                 ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
                 bool hasData = ActiveEntityManager.HasComponent<TweenScale>(entity);
                 Assert.IsFalse(hasData, "Tween data should have been removed.");
-
-                ActiveWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTag = ActiveEntityManager.HasComponent<TweenScaleCompleteTag>(entity);
-                Assert.IsTrue(hasCompleteTag, "Tween complete tag should have been added.");
-
-                ActiveWorld.GetOrCreateSystem<TweenScaleCompleteSystem>().Update();
-                ActiveWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>().Update();
-                bool hasCompleteTagAfter = ActiveEntityManager.HasComponent<TweenScaleCompleteTag>(entity);
-                Assert.IsFalse(hasCompleteTagAfter, "Tween complete tag should have been removed.");
             }
         }
 
