@@ -5,37 +5,37 @@ namespace Timespawn.Core.System
     [DisallowMultipleComponent]
     public abstract class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
-        protected static T ProtectedInstance;
+        private static T PrivateInstance;
 
         public static T Instance()
         {
-            if (!ProtectedInstance)
+            if (!PrivateInstance)
             {
                 GameObject obj = new GameObject(typeof(T).Name);
-                ProtectedInstance = obj.AddComponent<T>();
+                PrivateInstance = obj.AddComponent<T>();
             }
 
-            return ProtectedInstance;
+            return PrivateInstance;
         }
 
         protected virtual void Awake()
         {
-            if (ProtectedInstance)
+            if (PrivateInstance)
             {
                 Debug.LogWarningFormat("Singleton instance of {0} already exists. Destroy self.", GetType().Name);
                 Destroy(this);
             }
             else
             {
-                ProtectedInstance = this as T;
+                PrivateInstance = this as T;
             }
         }
 
         protected void OnDestroy()
         {
-            if (ProtectedInstance == this)
+            if (PrivateInstance == this)
             {
-                ProtectedInstance = null;
+                PrivateInstance = null;
             }
         }
     }
