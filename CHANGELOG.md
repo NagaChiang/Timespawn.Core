@@ -16,6 +16,12 @@
 
 - Tween complete tags
 
+### System
+
+#### Added
+
+- Generic `Singleton` base class
+
 ### Misc
 
 #### Added

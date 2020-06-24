@@ -11,8 +11,7 @@ namespace Timespawn.Core.System
         {
             if (!PrivateInstance)
             {
-                GameObject obj = new GameObject(typeof(T).Name);
-                PrivateInstance = obj.AddComponent<T>();
+                PrivateInstance = new GameObject(typeof(T).Name).AddComponent<T>();
             }
 
             return PrivateInstance;
