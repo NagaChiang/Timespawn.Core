@@ -1,6 +1,6 @@
 ﻿namespace Timespawn.Core.System
 {
-    public class Singleton<T> where T : new()
+    public abstract class Singleton<T> where T : new()
     {
         private static T PrivateInstance;
 
