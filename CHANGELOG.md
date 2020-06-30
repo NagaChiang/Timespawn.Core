@@ -16,6 +16,12 @@
 
 - Tween complete tags
 
+### DOTS Grid
+
+#### Removed
+
+- All grid and cell functionalities
+
 ### System
 
 #### Added
