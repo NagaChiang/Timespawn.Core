@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace Timespawn.Core.Common
 {
-    public static class EnumUtils
+    public static class CommonUtils
     {
         public static int GetEnumCount<T>()
         {
@@ -25,6 +25,11 @@ namespace Timespawn.Core.Common
             }
 
             return int2.zero;
+        }
+
+        public static uint GenerateRandomSeed()
+        {
+            return (uint)Environment.TickCount & int.MaxValue;
         }
     }
 }

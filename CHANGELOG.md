@@ -32,11 +32,13 @@
 
 #### Added
 
-- `EnumUtils.GetEnumCount()`
+- `CommonUtils.GetEnumCount()`
+- `CommonUtils.GenerateRandomSeed()`
 
 #### Changed
 
 - Remove suffix from all ECS ComponentData class names
+- Rename `EnumUtils` to `CommonUtils`
 
 ## [0.2.0] - 2020-05-26
 
