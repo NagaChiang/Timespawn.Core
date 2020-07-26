@@ -39,6 +39,7 @@
 
 - Remove suffix from all ECS ComponentData class names
 - Rename `EnumUtils` to `CommonUtils`
+- Upgrade to Unity 2020.1.0f1
 
 ## [0.2.0] - 2020-05-26
 

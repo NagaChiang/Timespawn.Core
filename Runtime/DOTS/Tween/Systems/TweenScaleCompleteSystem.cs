@@ -9,7 +9,7 @@ namespace Timespawn.Core.DOTS.Tween.Systems
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
             EndSimulationEntityCommandBufferSystem endSimulationECSSystem = DotsUtils.GetSystemFromDefaultWorld<EndSimulationEntityCommandBufferSystem>();
-            EntityCommandBuffer.Concurrent endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().ToConcurrent();
+            EntityCommandBuffer.ParallelWriter endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().AsParallelWriter();
             JobHandle job = Entities.ForEach((Entity entity, int entityInQueryIndex, ref TweenScale tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
