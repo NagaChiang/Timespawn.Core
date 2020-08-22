@@ -1,21 +1,18 @@
 ﻿using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
     [UpdateInGroup(typeof(TweenUpdateSystemGroup))]
-    public class TweenRotationUpdateSystem : JobComponentSystem
+    public class TweenRotationUpdateSystem : SystemBase
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref Rotation rotation, in TweenRotation tween) =>
+            Dependency = Entities.WithNone<TweenPauseTag>().ForEach((ref Rotation rotation, in TweenRotation tween) =>
             {
                 rotation.Value = math.slerp(tween.Start, tween.End, tween.State.Percentage);
-            }).Schedule(inputDeps);
-            
-            return jobHandle;
+            }).Schedule(Dependency);
         }
     }
 }

@@ -1,21 +1,18 @@
 ﻿using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
     [UpdateInGroup(typeof(TweenUpdateSystemGroup))]
-    public class TweenScaleUpdateSystem : JobComponentSystem
+    public class TweenScaleUpdateSystem : SystemBase
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref NonUniformScale scale, in TweenScale tween) =>
+            Dependency = Entities.WithNone<TweenPauseTag>().ForEach((ref NonUniformScale scale, in TweenScale tween) =>
             {
                 scale.Value = math.lerp(tween.Start, tween.End, tween.State.Percentage);
-            }).Schedule(inputDeps);
-
-            return jobHandle;
+            }).Schedule(Dependency);
         }
     }
 }

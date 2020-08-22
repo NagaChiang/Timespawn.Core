@@ -1,20 +1,17 @@
 ﻿using Unity.Entities;
-using Unity.Jobs;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
     [UpdateInGroup(typeof(TweenEaseSystemGroup))]
-    public class TweenRotationEaseSystem : JobComponentSystem
+    public class TweenRotationEaseSystem : SystemBase
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
             float deltaTime = Time.DeltaTime;
-            JobHandle jobHandle = Entities.WithNone<TweenPauseTag>().ForEach((ref TweenRotation tween) =>
+            Dependency = Entities.WithNone<TweenPauseTag>().ForEach((ref TweenRotation tween) =>
             {
                 TweenSystemUtils.UpdateTweenState(ref tween.State, deltaTime);
-            }).Schedule(inputDeps);
-
-            return jobHandle;
+            }).Schedule(Dependency);
         }
     }
 }

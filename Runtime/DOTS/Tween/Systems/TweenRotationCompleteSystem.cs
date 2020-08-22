@@ -1,26 +1,23 @@
 ﻿using Unity.Entities;
-using Unity.Jobs;
 
 namespace Timespawn.Core.DOTS.Tween.Systems
 {
     [UpdateInGroup(typeof(TweenCompleteSystemGroup))]
-    public class TweenRotationCompleteSystem : JobComponentSystem
+    public class TweenRotationCompleteSystem : SystemBase
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
             EndSimulationEntityCommandBufferSystem endSimulationECSSystem = DotsUtils.GetSystemFromDefaultWorld<EndSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer.ParallelWriter endSimulationCommandBuffer = endSimulationECSSystem.CreateCommandBuffer().AsParallelWriter();
-            JobHandle job = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenRotation tween) =>
+            Dependency = Entities.WithNone<TweenPauseTag>().ForEach((Entity entity, int entityInQueryIndex, ref TweenRotation tween) =>
             {
                 if (TweenSystemUtils.CompleteTweenState(ref tween.State))
                 {
                     endSimulationCommandBuffer.RemoveComponent<TweenRotation>(entityInQueryIndex, entity);
                 }
-            }).Schedule(inputDeps);
+            }).Schedule(Dependency);
 
-            endSimulationECSSystem.AddJobHandleForProducer(job);
-
-            return job;
+            endSimulationECSSystem.AddJobHandleForProducer(Dependency);
         }
     }
 }

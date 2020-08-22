@@ -11,6 +11,7 @@
 #### Changed
 
 - All tween include EntityCommandBuffer parameter for using Burst
+- Replace deprecated JobComponentSystem with SystemBase
 
 #### Removed
 
