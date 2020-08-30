@@ -12,6 +12,7 @@
 
 - All tween include EntityCommandBuffer parameter for using Burst
 - Replace deprecated JobComponentSystem with SystemBase
+- Remove default arguments of exponent for `SmoothStart()`, `SmoothStop()` and `SmoothStep()`
 
 #### Removed
 

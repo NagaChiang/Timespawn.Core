@@ -6,7 +6,6 @@ using Timespawn.Core.Math;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Timespawn.Core.Tests
 {

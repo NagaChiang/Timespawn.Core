@@ -21,7 +21,7 @@ namespace Timespawn.Core.Math
     {
         public delegate float EaseFunction(float t);
 
-        public static float SmoothStart(float t, int exponent = 2)
+        public static float SmoothStart(float t, int exponent)
         {
             float product = 1;
             for (int n = 0; n < exponent; n++)
@@ -32,7 +32,7 @@ namespace Timespawn.Core.Math
             return product;
         }
 
-        public static float SmoothStop(float t, int exponent = 2)
+        public static float SmoothStop(float t, int exponent)
         {
             float product = 1;
             for (int n = 0; n < exponent; n++)
@@ -43,7 +43,7 @@ namespace Timespawn.Core.Math
             return 1 - product;
         }
 
-        public static float SmoothStep(float t, int exponent = 2)
+        public static float SmoothStep(float t, int exponent)
         {
             return math.lerp(SmoothStart(t, exponent), SmoothStop(t, exponent), t);
         }
