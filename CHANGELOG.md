@@ -7,6 +7,7 @@
 #### Added
 
 - Public static readonly variable `ReadOnlyTweenComponentTypes`
+- `ParallelWriter` support
 
 #### Changed
 
