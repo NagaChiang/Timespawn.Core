@@ -18,6 +18,7 @@
 #### Removed
 
 - Tween complete tags
+- All tween functionalities
 
 ### DOTS Grid
 
