@@ -2,48 +2,24 @@
 
 ## [Unreleased]
 
-### DOTS Tween
-
-#### Added
-
-- Public static readonly variable `ReadOnlyTweenComponentTypes`
-- `ParallelWriter` support
-
-#### Changed
-
-- All tween include EntityCommandBuffer parameter for using Burst
-- Replace deprecated JobComponentSystem with SystemBase
-- Remove default arguments of exponent for `SmoothStart()`, `SmoothStop()` and `SmoothStep()`
-
-#### Removed
-
-- Tween complete tags
-- All tween functionalities
-
-### DOTS Grid
-
-#### Removed
-
-- All grid and cell functionalities
-
-### System
-
-#### Added
+### Added
 
 - Generic `Singleton` base class
-
-### Misc
-
-#### Added
-
 - `CommonUtils.GetEnumCount()`
 - `CommonUtils.GenerateRandomSeed()`
+- `DotsUtils.CreateParallelWriter()`
 
-#### Changed
+### Changed
 
 - Remove suffix from all ECS ComponentData class names
 - Rename `EnumUtils` to `CommonUtils`
 - Upgrade to Unity 2020.1.0f1
+- Rename `DotsUtils.CreateECBFromSystem()` to `DotsUtils.CreateCommandBuffer()`
+
+### Removed
+
+- All tween functionalities
+- All grid and cell functionalities
 
 ## [0.2.0] - 2020-05-26
 

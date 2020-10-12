@@ -9,9 +9,14 @@ namespace Timespawn.Core.DOTS
             return World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<T>();
         }
 
-        public static EntityCommandBuffer CreateECBFromSystem<T>() where T : EntityCommandBufferSystem
+        public static EntityCommandBuffer CreateCommandBuffer<T>() where T : EntityCommandBufferSystem
         {
             return GetSystemFromDefaultWorld<T>().CreateCommandBuffer();
+        }
+
+        public static EntityCommandBuffer.ParallelWriter CreateParallelWriter<T>() where T : EntityCommandBufferSystem
+        {
+            return GetSystemFromDefaultWorld<T>().CreateCommandBuffer().AsParallelWriter();
         }
     }
 }
