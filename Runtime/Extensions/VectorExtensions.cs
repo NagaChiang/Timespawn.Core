@@ -1,5 +1,8 @@
 ﻿using Unity.Mathematics;
+
+#if !UNITY_DOTSRUNTIME
 using UnityEngine;
+#endif
 
 namespace Timespawn.Core.Extensions
 {
@@ -15,6 +18,7 @@ namespace Timespawn.Core.Extensions
             return new int3(pos.x, pos.y, 0);
         }
 
+#if !UNITY_DOTSRUNTIME
         public static Vector3 ToVector3(this Vector2 pos)
         {
             return new Vector3(pos.x, pos.y, 0.0f);
@@ -24,5 +28,6 @@ namespace Timespawn.Core.Extensions
         {
             return new Vector3Int(pos.x, pos.y, 0);
         }
+#endif
     }
 }

@@ -21,6 +21,10 @@
 - All tween functionalities
 - All grid and cell functionalities
 
+### Fixed
+
+- Compatibility to DOTS runtime
+
 ## [0.2.0] - 2020-05-26
 
 ### DOTS Tween

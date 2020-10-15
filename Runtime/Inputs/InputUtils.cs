@@ -1,11 +1,15 @@
 ﻿using Timespawn.Core.Common;
 using Unity.Mathematics;
+
+#if !UNITY_DOTSRUNTIME
 using UnityEngine;
+#endif
 
 namespace Timespawn.Core.Inputs
 {
     public static class InputUtils
     {
+#if !UNITY_DOTSRUNTIME
         public static bool TryTranslateInputToDirection(Vector2 delta, out Direction2D outDirection, float deadZone = 1.0f)
         {
             outDirection = default;
@@ -25,5 +29,6 @@ namespace Timespawn.Core.Inputs
 
             return true;
         }
+#endif
     }
 }

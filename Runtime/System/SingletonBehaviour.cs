@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if !UNITY_DOTSRUNTIME
+using UnityEngine;
 
 namespace Timespawn.Core.System
 {
@@ -39,3 +40,4 @@ namespace Timespawn.Core.System
         }
     }
 }
+#endif
