@@ -15,6 +15,7 @@
 - Rename `EnumUtils` to `CommonUtils`
 - Upgrade to Unity 2020.1.0f1
 - Rename `DotsUtils.CreateECBFromSystem()` to `DotsUtils.CreateCommandBuffer()`
+- Rename `VectorExtensions` to `MathExtensions`
 
 ### Removed
 
