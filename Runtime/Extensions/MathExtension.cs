@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Timespawn.Core.Extensions
 {
-    public static class MathExtensions
+    public static class MathExtension
     {
         public static float3 ToFloat3(this float2 pos)
         {

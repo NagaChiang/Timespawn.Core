@@ -2,7 +2,7 @@
 
 namespace Timespawn.Core.Extensions
 {
-    public static class ArrayExtensions
+    public static class ArrayExtension
     {
         public static bool IsValidIndex(this Array array, int index)
         {
