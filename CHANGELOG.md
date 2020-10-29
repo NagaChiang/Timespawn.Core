@@ -22,6 +22,7 @@
 
 - All tween functionalities
 - All grid and cell functionalities
+- All `DotsUtils` about default world
 
 ### Fixed
 
