@@ -22,15 +22,15 @@ namespace Timespawn.Core.Common
             return int2.zero;
         }
 
+        public static uint GenerateRandomSeed()
+        {
+            return (uint) DateTime.UtcNow.Ticks & int.MaxValue;
+        }
+
 #if !UNITY_DOTSRUNTIME
         public static int GetEnumCount<T>()
         {
             return Enum.GetNames(typeof(T)).Length;
-        }
-
-        public static uint GenerateRandomSeed()
-        {
-            return (uint)Environment.TickCount & int.MaxValue;
         }
 #endif
     }
